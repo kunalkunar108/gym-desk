@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Activity, ArrowDownRight, ArrowUpRight, Bell, CalendarDays, ChevronDown, CircleDollarSign, Clock3, Dumbbell, LayoutDashboard, LogOut, Search, Settings, Users, UserPlus, WalletCards } from "lucide-react";
 
 const stats = [
@@ -18,8 +19,8 @@ const expiring = [
   { name: "Rohit Kumar", phone: "••••• 7732", plan: "Monthly", date: "08 Nov 2026" },
 ];
 
-function SidebarLink({ icon: Icon, label, active = false }: { icon: typeof LayoutDashboard; label: string; active?: boolean }) {
-  return <a href="#" className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition ${active ? "bg-blue-50 text-blue-700" : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"}`}><Icon size={18} strokeWidth={1.8} />{label}</a>;
+function SidebarLink({ icon: Icon, label, href, active = false }: { icon: typeof LayoutDashboard; label: string; href: string; active?: boolean }) {
+  return <Link href={href} className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition ${active ? "bg-blue-50 text-blue-700" : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"}`}><Icon size={18} strokeWidth={1.8} />{label}</Link>;
 }
 
 export default function DashboardPage() {
