@@ -1,0 +1,47 @@
+import { Activity, ArrowDownRight, ArrowUpRight, Bell, CalendarDays, ChevronDown, CircleDollarSign, Clock3, Dumbbell, LayoutDashboard, LogOut, Search, Settings, Users, UserPlus, WalletCards } from "lucide-react";
+
+const stats = [
+  { label: "Total members", value: "248", change: "+12 this month", up: true, icon: Users, tone: "blue" },
+  { label: "Active memberships", value: "196", change: "79% of members", up: true, icon: Dumbbell, tone: "violet" },
+  { label: "Collected this month", value: "₹84,500", change: "+8.2% vs last month", up: true, icon: CircleDollarSign, tone: "green" },
+  { label: "Expiring in 7 days", value: "18", change: "Needs follow-up", up: false, icon: Clock3, tone: "amber" },
+];
+const activity = [
+  { initials: "AS", name: "Aarav Singh", detail: "Monthly membership · Cash", time: "09:42 AM", status: "Checked in" },
+  { initials: "PK", name: "Priya Kumari", detail: "Quarterly membership · UPI", time: "09:35 AM", status: "Payment received" },
+  { initials: "RM", name: "Rahul Mishra", detail: "Monthly membership · Card", time: "09:18 AM", status: "Checked in" },
+  { initials: "NS", name: "Neha Sharma", detail: "Annual membership · UPI", time: "08:56 AM", status: "Renewed" },
+];
+const expiring = [
+  { name: "Sahil Verma", phone: "••••• 4821", plan: "Monthly", date: "06 Nov 2026" },
+  { name: "Ananya Das", phone: "••••• 1904", plan: "Quarterly", date: "07 Nov 2026" },
+  { name: "Rohit Kumar", phone: "••••• 7732", plan: "Monthly", date: "08 Nov 2026" },
+];
+
+function SidebarLink({ icon: Icon, label, active = false }: { icon: typeof LayoutDashboard; label: string; active?: boolean }) {
+  return <a href="#" className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition ${active ? "bg-blue-50 text-blue-700" : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"}`}><Icon size={18} strokeWidth={1.8} />{label}</a>;
+}
+
+export default function DashboardPage() {
+  return <main className="min-h-screen lg:grid lg:grid-cols-[248px_1fr]">
+    <aside className="hidden border-r border-slate-200 bg-white px-5 py-6 lg:flex lg:flex-col">
+      <div className="mb-10 flex items-center gap-3 px-2"><div className="grid h-10 w-10 place-items-center rounded-xl bg-blue-600 text-white"><Dumbbell size={22}/></div><div><p className="text-lg font-bold tracking-tight text-slate-900">GymDesk</p><p className="text-xs text-slate-400">Management workspace</p></div></div>
+      <p className="mb-3 px-3 text-[10px] font-bold uppercase tracking-[.16em] text-slate-400">Workspace</p>
+      <nav className="space-y-1"><SidebarLink icon={LayoutDashboard} label="Overview" active/><SidebarLink icon={Users} label="Members"/><SidebarLink icon={CalendarDays} label="Attendance"/><SidebarLink icon={Dumbbell} label="Membership plans"/><SidebarLink icon={WalletCards} label="Payments"/></nav>
+      <p className="mb-3 mt-9 px-3 text-[10px] font-bold uppercase tracking-[.16em] text-slate-400">Manage</p>
+      <nav className="space-y-1"><SidebarLink icon={Activity} label="Reports"/><SidebarLink icon={Settings} label="Settings"/></nav>
+      <div className="mt-auto rounded-2xl bg-slate-50 p-4"><div className="mb-2 flex items-center gap-2 text-sm font-semibold text-slate-800"><Activity size={16} className="text-blue-600"/>Your gym workspace</div><p className="text-xs leading-5 text-slate-500">Keep memberships, payments and daily check-ins organized in one place.</p></div>
+      <div className="mt-5 flex items-center gap-3 border-t border-slate-100 pt-5"><div className="grid h-9 w-9 place-items-center rounded-full bg-slate-200 text-xs font-bold text-slate-600">AD</div><div className="min-w-0 flex-1"><p className="truncate text-sm font-semibold text-slate-800">Gym Admin</p><p className="text-xs text-slate-400">Administrator</p></div><LogOut size={17} className="text-slate-400"/></div>
+    </aside>
+    <section className="min-w-0">
+      <header className="flex h-[76px] items-center justify-between border-b border-slate-200 bg-white px-5 sm:px-8"><div><p className="text-xs font-medium text-slate-400">Thursday, 5 November 2026</p><h1 className="text-lg font-bold tracking-tight text-slate-900">Overview</h1></div><div className="flex items-center gap-3"><button aria-label="Search" className="grid h-10 w-10 place-items-center rounded-xl border border-slate-200 text-slate-500"><Search size={18}/></button><button aria-label="Notifications" className="relative grid h-10 w-10 place-items-center rounded-xl border border-slate-200 text-slate-500"><Bell size={18}/><span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-blue-600 ring-2 ring-white"/></button><button className="hidden items-center gap-2 rounded-xl border border-slate-200 px-3 py-2 text-sm font-medium text-slate-600 sm:flex">Today <ChevronDown size={15}/></button></div></header>
+      <div className="mx-auto max-w-[1440px] space-y-7 p-5 sm:p-8">
+        <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><p className="text-sm text-slate-500">Here’s what’s happening at your gym today.</p><h2 className="mt-1 text-2xl font-bold tracking-tight text-slate-900">Good morning 👋</h2></div><div className="flex flex-wrap gap-2"><button className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm"><UserPlus size={16}/> Add member</button><button className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm shadow-blue-200"><CalendarDays size={16}/> Check in member</button></div></div>
+        <div className="grid gap-4 sm:grid-cols-2 2xl:grid-cols-4">{stats.map((item) => { const Icon = item.icon; return <article key={item.label} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-100/70"><div className="flex items-center justify-between"><p className="text-sm font-medium text-slate-500">{item.label}</p><span className={`grid h-10 w-10 place-items-center rounded-xl ${item.tone === "blue" ? "bg-blue-50 text-blue-600" : item.tone === "violet" ? "bg-violet-50 text-violet-600" : item.tone === "green" ? "bg-emerald-50 text-emerald-600" : "bg-amber-50 text-amber-600"}`}><Icon size={19}/></span></div><p className="mt-4 text-3xl font-bold tracking-tight text-slate-900">{item.value}</p><p className="mt-2 flex items-center gap-1 text-xs font-medium text-slate-500">{item.up ? <ArrowUpRight size={14} className="text-emerald-600"/> : <ArrowDownRight size={14} className="text-amber-600"/>}{item.change}</p></article>})}</div>
+        <div className="grid gap-6 xl:grid-cols-[1.35fr_1fr]"><section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-100/70"><div className="mb-5 flex items-center justify-between"><div><h3 className="font-bold text-slate-900">Recent activity</h3><p className="mt-1 text-xs text-slate-400">Latest updates from your gym</p></div><button className="text-xs font-semibold text-blue-600">View all</button></div><div className="space-y-1">{activity.map((item) => <div key={item.name} className="flex items-center gap-3 rounded-xl px-2 py-3 hover:bg-slate-50"><div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-slate-100 text-xs font-bold text-slate-600">{item.initials}</div><div className="min-w-0 flex-1"><p className="truncate text-sm font-semibold text-slate-800">{item.name}</p><p className="truncate text-xs text-slate-400">{item.detail}</p></div><div className="hidden text-right sm:block"><p className="text-xs font-medium text-slate-600">{item.time}</p><p className="mt-1 text-[11px] text-slate-400">{item.status}</p></div></div>)}</div></section>
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-100/70"><div className="mb-5 flex items-center justify-between"><div><h3 className="font-bold text-slate-900">Memberships expiring</h3><p className="mt-1 text-xs text-slate-400">Members to follow up this week</p></div><span className="rounded-full bg-amber-50 px-2.5 py-1 text-xs font-semibold text-amber-700">18 pending</span></div><div className="space-y-4">{expiring.map((item) => <div key={item.name} className="flex items-center gap-3"><div className="grid h-9 w-9 place-items-center rounded-full bg-amber-50 text-xs font-bold text-amber-700">{item.name.split(" ").map(n=>n[0]).join("")}</div><div className="min-w-0 flex-1"><p className="text-sm font-semibold text-slate-800">{item.name}</p><p className="text-xs text-slate-400">{item.plan} · {item.phone}</p></div><p className="whitespace-nowrap text-xs font-medium text-slate-500">{item.date}</p></div>)}</div><button className="mt-5 w-full rounded-xl border border-slate-200 py-2.5 text-xs font-semibold text-slate-600">View expiring members</button></section></div>
+        <div className="rounded-2xl border border-blue-100 bg-blue-50/70 p-5"><div className="flex items-start gap-3"><div className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white text-blue-600"><Activity size={18}/></div><div><p className="text-sm font-semibold text-slate-800">Your workspace is ready for setup</p><p className="mt-1 text-xs leading-5 text-slate-500">This is the initial dashboard UI. We’ll connect real member, payment and attendance data in the next development steps.</p></div></div></div>
+      </div>
+    </section>
+  </main>;
+}
